@@ -1,5 +1,8 @@
 const getPosts = "SELECT * FROM posts WHERE is_draft = false";
-const getDraftPosts = "SELECT * FROM posts WHERE is_draft = true";
+const getDraftPostsByUser = "SELECT * FROM posts WHERE is_draft = true";
+
+const getPostsByUser =
+  "SELECT * FROM posts WHERE is_draft = false AND author_id = $1";
 
 const getPostById = "SELECT * FROM posts WHERE id = $1";
 
