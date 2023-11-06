@@ -8,4 +8,6 @@ router.post("/log-out", usersController.logOut);
 
 router.post("/sign-up", usersController.signUp);
 
+router.get("/validate-user", usersController.validateUser);
+
 module.exports = router;

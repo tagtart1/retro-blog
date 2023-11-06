@@ -1,0 +1,16 @@
+.update-post-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.update-post-form {
+  max-width: 600px;
+}
+
+textarea {
+  resize: none;
+  font-family: inherit;
+}

@@ -2,14 +2,26 @@ var express = require("express");
 var router = express.Router();
 const postsController = require("../controllers/postsController");
 const validateIdParams = require("../middleware/validateIdParams");
+const validateToken = require("../middleware/validateToken");
 
 // posts routes
 router.get("/", postsController.getAllPosts);
-router.post("/", postsController.addPost);
+router.get("/drafts", validateToken, postsController.getDraftsFromUser);
+router.post("/", validateToken, postsController.addPost);
 
 router.get("/:id", validateIdParams, postsController.getPostById);
-router.delete("/:id", validateIdParams, postsController.deletePost);
+router.delete(
+  "/:id",
+  validateToken,
+  validateIdParams,
+  postsController.deletePost
+);
 
-router.patch("/:id", validateIdParams, postsController.updatePost);
+router.patch(
+  "/:id",
+  validateToken,
+  validateIdParams,
+  postsController.updatePost
+);
 
 module.exports = router;

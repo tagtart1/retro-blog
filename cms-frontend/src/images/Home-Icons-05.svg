@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_5" data-name="Layer 5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #a26a77;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        stroke: #231f20;
+      }
+
+      .cls-1, .cls-3, .cls-6, .cls-7, .cls-8 {
+        stroke-linecap: round;
+      }
+
+      .cls-1, .cls-6 {
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #ebdfd7;
+      }
+
+      .cls-2, .cls-4, .cls-5 {
+        stroke-width: 8px;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 6px;
+      }
+
+      .cls-4 {
+        fill: #231f20;
+      }
+
+      .cls-9 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+
+      .cls-5, .cls-8 {
+        fill: #1c8fc1;
+      }
+
+      .cls-6 {
+        fill: #178b43;
+      }
+
+      .cls-7 {
+        fill: #e6e2e3;
+        stroke-width: 7px;
+      }
+
+      .cls-8 {
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <g>
+    <rect class="cls-4" x="107.27" y="102.24" width="366.67" height="295.33" rx="15.02" ry="15.02"/>
+    <rect class="cls-4" x="51.6" y="397.58" width="478" height="125.71" rx="14.52" ry="14.52"/>
+  </g>
+  <g>
+    <rect class="cls-2" x="116.67" y="89.48" width="366.67" height="295.33" rx="15.02" ry="15.02"/>
+    <rect class="cls-2" x="61" y="384.81" width="478" height="125.71" rx="14.52" ry="14.52"/>
+    <rect class="cls-5" x="141.28" y="118.33" width="321.33" height="241.33"/>
+    <line class="cls-8" x1="97.67" y1="416.52" x2="195.67" y2="416.52"/>
+    <rect class="cls-7" x="97.67" y="451.85" width="231.33" height="22.67" rx="11.33" ry="11.33"/>
+    <circle class="cls-6" cx="453" cy="463.19" r="11.33"/>
+    <circle class="cls-1" cx="494.67" cy="463.19" r="11.33"/>
+    <g>
+      <circle class="cls-9" cx="219.28" cy="214.83" r="17"/>
+      <circle class="cls-9" cx="384.62" cy="214.83" r="17"/>
+      <path class="cls-3" d="m258.52,244.44s43.1,80.38,90.1,0"/>
+    </g>
+  </g>
+</svg>

@@ -22,10 +22,18 @@ exports.logIn = asyncHandler(async (req, res, next) => {
   }
 
   // Find user
-  const user = await pool.query(userQueries.getUserByUsername, [inputUsername]);
-
+  const user = (
+    await pool.query(userQueries.getUserByUsername, [inputUsername])
+  ).rows[0];
+  if (!user) {
+    throw new AppError(
+      "The username or password provided is incorrect",
+      401,
+      "INVALID_CREDENTIALS"
+    );
+  }
   // Authenticate password
-  const result = await bcrypt.compare(inputPassword, user.rows[0].password);
+  const result = await bcrypt.compare(inputPassword, user.password);
   if (!result) {
     console.log("failed compare");
     throw new AppError(
@@ -35,16 +43,7 @@ exports.logIn = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Fail with credentials to not reveal if user truly exists or not
-  if (!user.rows.length) {
-    throw new AppError(
-      "The username or password provided is incorrect",
-      401,
-      "INVALID_CREDENTIALS"
-    );
-  }
-
-  sendTokenResponse(user.rows[0], 200, req, res, next);
+  sendTokenResponse(user, 200, req, res, next);
 });
 
 exports.logOut = (req, res) => {
@@ -97,3 +96,19 @@ exports.signUp = [
     sendTokenResponse(newUser.rows[0], 201, req, res, next);
   }),
 ];
+
+exports.validateUser = asyncHandler(async (req, res) => {
+  const token = req.cookies.token;
+
+  jwt.verify(token, process.env.SECRETKEY, (err, userData) => {
+    if (err) {
+      throw new AppError(
+        "User timed out, please log back in",
+        401,
+        "TIMED_OUT"
+      );
+    } else {
+      return res.json({ data: userData });
+    }
+  });
+});

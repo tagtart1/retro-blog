@@ -8,12 +8,27 @@ const jwt = require("jsonwebtoken");
 
 // GET all non draft posts
 exports.getAllPosts = asyncHandler(async (req, res) => {
-  pool.query(postsQueries.getPosts, (err, results) => {
+  const userId = req.query.user_id;
+  const query = userId ? postsQueries.getPostsByUser : postsQueries.getPosts;
+  const params = userId ? [userId] : [];
+
+  pool.query(query, params, (err, results) => {
     if (err)
       throw new AppError("Could not retrieve posts", 400, "SERVER_ERROR");
 
     res.status(200).json({ data: { posts: results.rows } });
   });
+});
+
+// GET all posts from user
+
+// GET all draft posts from user
+exports.getDraftsFromUser = asyncHandler(async (req, res) => {
+  const results = await pool.query(postsQueries.getDraftPostsByUser, [
+    req.user.id,
+  ]);
+
+  res.status(200).json({ data: { posts: results.rows } });
 });
 
 // GET specific post
@@ -26,7 +41,7 @@ exports.getPostById = asyncHandler(async (req, res) => {
     throw new AppError("Post not found", 404, "NOT_FOUND");
   }
 
-  res.status(200).json({ data: { post: results.rows } });
+  res.status(200).json({ data: { post: results.rows[0] } });
 });
 
 // POST new post
@@ -40,23 +55,21 @@ exports.addPost = [
     .escape(),
   body("isDraft").isBoolean(),
   asyncHandler(async (req, res) => {
+    console.log("hey");
     const inputErrors = validationResult(req);
-
-    const newPost = {
-      title: req.body.title,
-      text: req.body.text,
-      is_draft: req.body.isDraft,
-    };
-
-    // VERIFY JWT TO GET AUTHOR ID
-
-    newPost.author_id = 1;
 
     if (!inputErrors.isEmpty()) {
       const formattedErrors = inputErrors.array().map((err) => err.msg);
 
       throw new AppError(formattedErrors[0], 400, "INPUT_ERROR");
     }
+
+    const newPost = {
+      title: req.body.title,
+      text: req.body.text,
+      is_draft: req.body.isDraft,
+      author_id: req.user.id,
+    };
 
     // Add post
     const results = await pool.query(postsQueries.addPost, [
@@ -85,7 +98,7 @@ exports.updatePost = [
 
     if (!inputErrors.isEmpty()) {
       const formattedErrors = inputErrors.array().map((err) => err.msg);
-
+      console.log("ERROR");
       throw new AppError(formattedErrors[0], 400, "INPUT_ERROR");
     }
 
@@ -94,15 +107,16 @@ exports.updatePost = [
       text: req.body.text,
       isDraft: req.body.isDraft,
     };
-
-    const result = await pool.query(postsQueries.updatePost, [
+    // Can also seperate concerns like we did in the delete operation
+    const result = await pool.query(postsQueries.findAndUpdatePost, [
       update.title,
       update.text,
       update.isDraft,
       id,
+      req.user.id,
     ]);
     if (!result.rows.length) {
-      throw new AppError("Post not found", 404, "NOT_FOUND");
+      throw new AppError("Invalid permissions", 403, "INVALID_CREDENTIALS");
     }
     res.status(200).json({ data: { post: result.rows[0] } });
   }),
@@ -111,10 +125,17 @@ exports.updatePost = [
 exports.deletePost = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
-  // WRAP IN jwt.verify
-  const postToDelete = await pool.query(postsQueries.deletePost, [id]);
-  if (!postToDelete.rows.length) {
+  const post = await pool.query(postsQueries.getPostById, [id]);
+  const postToDelete = post.rows[0];
+  if (!postToDelete) {
     throw new AppError("Post not found", 404, "NOT_FOUND");
   }
-  res.status(200).json({ data: { post: postToDelete.rows[0] } });
+
+  if (postToDelete.author_id !== req.user.id) {
+    throw new AppError("Invalid Permissions", 403, "INVALID_CREDENTIALS");
+  }
+
+  const deletedPost = await pool.query(postsQueries.deletePost, [id]);
+
+  res.status(200).json({ data: { post: deletedPost.rows[0] } });
 });

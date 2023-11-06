@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_4" data-name="Layer 4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 612 553">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f39e54;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8 {
+        stroke: #231f20;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-6, .cls-7, .cls-8 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-8 {
+        stroke-width: 9.3px;
+      }
+
+      .cls-2, .cls-4, .cls-6, .cls-7 {
+        stroke-width: 4.04px;
+      }
+
+      .cls-2, .cls-5 {
+        fill: none;
+      }
+
+      .cls-3 {
+        fill: #f8c55b;
+        stroke-width: 13.94px;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 15.11px;
+      }
+
+      .cls-6 {
+        fill: #d1d3d4;
+      }
+
+      .cls-7, .cls-8 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <path class="cls-7" d="m157.97,120.3v330.84c0,23.92,19.39,43.3,43.3,43.3h207.81c23.92,0,43.3-19.39,43.3-43.3v-249.26c0-10.38-111.57-122.23-121.69-122.43l-128.6-2.45c-24.23-.46-44.13,19.06-44.13,43.3Z"/>
+      <g>
+        <path class="cls-4" d="m179.53,97.45v339.76c0,21.48,17.41,38.89,38.89,38.89h216.63c21.48,0,38.89-17.41,38.89-38.89v-253.68c0-10.38-111.57-122.23-121.69-122.43l-133.1-2.54c-21.76-.41-39.63,17.11-39.63,38.88Z"/>
+        <path class="cls-6" d="m352.33,64.45l6.58,102.29c.73,11.33,10.34,20.03,21.69,19.63l90.28-3.24c.84-.03,1.29-.99.78-1.65-8.08-10.45-55.71-70.63-117.12-118.2-.93-.72-2.28,0-2.21,1.17Z"/>
+      </g>
+      <rect class="cls-2" x="206.87" y="145.48" width="127.71" height="1.35" rx=".67" ry=".67"/>
+      <rect class="cls-2" x="206.87" y="210.78" width="127.71" height="1.35" rx=".67" ry=".67"/>
+      <rect class="cls-2" x="334.59" y="342.18" width="127.71" height="1.35" rx=".67" ry=".67"/>
+      <rect class="cls-2" x="334.59" y="282.37" width="127.71" height="1.35" rx=".67" ry=".67"/>
+    </g>
+    <circle class="cls-8" cx="201.24" cy="402.8" r="125.5"/>
+  </g>
+  <g>
+    <circle class="cls-1" cx="209.09" cy="394.27" r="125.5"/>
+    <ellipse class="cls-3" cx="208.48" cy="394.79" rx="97.06" ry="96.31"/>
+    <polyline class="cls-5" points="254.12 406.82 212.54 406.82 176.01 350.54"/>
+  </g>
+</svg>

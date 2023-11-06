@@ -1,5 +1,8 @@
-const getPosts = "SELECT * FROM posts WHERE is_draft = false";
-const getDraftPostsByUser = "SELECT * FROM posts WHERE is_draft = true";
+const getPosts =
+  "SELECT posts.*, users.username FROM posts JOIN users ON posts.author_id = users.id WHERE is_draft = false";
+
+const getDraftPostsByUser =
+  "SELECT * FROM posts WHERE is_draft = true AND author_id = $1";
 
 const getPostsByUser =
   "SELECT * FROM posts WHERE is_draft = false AND author_id = $1";
@@ -13,10 +16,16 @@ const deletePost = "DELETE FROM posts WHERE id = $1 RETURNING *";
 const updatePost =
   "UPDATE posts SET title = $1, text = $2, is_draft = $3 WHERE id = $4 RETURNING *";
 
+const findAndUpdatePost =
+  "UPDATE posts SET title = $1, text = $2, is_draft = $3 WHERE id = $4 AND author_id = $5 RETURNING *";
+
 module.exports = {
   getPosts,
   getPostById,
   addPost,
   deletePost,
   updatePost,
+  findAndUpdatePost,
+  getDraftPostsByUser,
+  getPostsByUser,
 };
