@@ -8,6 +8,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UpdatePost from "./components/UpdatePost/UpdatePost";
+import Header from "./components/Header/Header";
 
 function App() {
   const { user, setUser } = useUser();
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/create" element={<CreatePost />} />

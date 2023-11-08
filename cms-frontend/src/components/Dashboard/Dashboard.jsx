@@ -1,31 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-import { usePosts } from "../../PostProvider";
 import { useUser } from "../../UserProvider";
 import "./Dashboard.css";
 import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "../../images/Create-Icon-01.svg";
+import { usePosts } from "../../PostProvider";
 
 const Dashboard = () => {
-  const { user, setUser } = useUser();
-  const { posts, setPosts, drafts, setDrafts } = usePosts();
-  const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser();
   const navigate = useNavigate();
+  const { posts, setPosts, drafts, setDrafts } = usePosts();
 
-  const logOut = async () => {
-    const response = await fetch("http://localhost:5000/api/v1/log-out", {
-      credentials: "include",
-      method: "POST",
-    });
-
-    if (response.ok) {
-      setUser(null);
-      setDrafts(null);
-      setPosts(null);
-      navigate("/log-in");
-    }
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const openPost = (postId) => {
     navigate(`/posts/${postId}`);
@@ -77,17 +64,6 @@ const Dashboard = () => {
 
   return (
     <main className="dashboard-main">
-      <header className="dashboard-header">
-        <h1>Hello {user.username}</h1>
-        <div className="action-bar">
-          <button className="logout-button" onClick={logOut}>
-            Log out
-          </button>
-          <Link to="/create">
-            <img src={CreateIcon} alt="create post" className="create-icon" />
-          </Link>
-        </div>
-      </header>
       <div className="user-post-sections">
         <section className="posts-feed">
           <h2>Posted</h2>

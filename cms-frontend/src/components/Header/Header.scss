@@ -1,0 +1,35 @@
+.app-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: #ebb337;
+  border-bottom: 4px solid black;
+  padding-bottom: 12px;
+}
+
+.app-header {
+  .action-bar {
+    display: flex;
+    gap: 24px;
+  }
+}
+
+.app-header {
+  h1 {
+    font-weight: bold;
+    font-size: 48px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  span {
+    margin-left: 36px;
+  }
+}
+.create-icon {
+  width: 100px;
+  height: 100px;
+}
