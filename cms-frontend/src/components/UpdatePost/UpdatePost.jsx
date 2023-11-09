@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import he from "he";
-import "./UpdatePost.css";
+import "./UpdatePost.scss";
 import { usePosts } from "../../PostProvider";
 
 const UpdatePost = () => {
@@ -97,46 +97,56 @@ const UpdatePost = () => {
   if (!currentPost) return;
 
   return (
-    <main className="update-post-main" onSubmit={updatePost}>
-      <form className="update-post-form">
-        <div className="label-group">
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            defaultValue={currentPost.title}
-          />
+    <div className="update-post-parent">
+      <main className="update-post-main">
+        <div className="tab-top">
+          <h2>Update Post</h2>
+          <div className="action-group">
+            <span>_</span>
+            <span>O</span>
+            <span>X</span>
+          </div>
         </div>
-        <div className="label-group">
-          <label htmlFor="text">Text:</label>
-          <textarea
-            name="text"
-            id="text"
-            cols="30"
-            rows="10"
-            defaultValue={he.decode(currentPost.text)}
-          ></textarea>
-        </div>
-        <button onClick={cancelEdit} type="button">
-          Cancel
-        </button>
-        <button type="submit">Save</button>
-        <button type="button" onClick={deletePost}>
-          Delete
-        </button>
-        {currentPost.is_draft ? (
-          <button type="submit" onClick={() => setShouldDraft(false)}>
-            Post
+        <form className="update-post-form" onSubmit={updatePost}>
+          <div className="label-group">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              defaultValue={currentPost.title}
+            />
+          </div>
+          <div className="label-group">
+            <label htmlFor="text">Text:</label>
+            <textarea
+              name="text"
+              id="text"
+              cols="30"
+              rows="10"
+              defaultValue={he.decode(currentPost.text)}
+            ></textarea>
+          </div>
+          <button onClick={cancelEdit} type="button">
+            Cancel
           </button>
-        ) : (
-          <button type="submit" onClick={() => setShouldDraft(true)}>
-            Send to drafts
+          <button type="submit">Save</button>
+          <button type="button" onClick={deletePost}>
+            Delete
           </button>
-        )}
-      </form>
-      {errors ? <div>{errors.message}</div> : null}
-    </main>
+          {currentPost.is_draft ? (
+            <button type="submit" onClick={() => setShouldDraft(false)}>
+              Post
+            </button>
+          ) : (
+            <button type="submit" onClick={() => setShouldDraft(true)}>
+              Send to drafts
+            </button>
+          )}
+        </form>
+        {errors ? <div>{errors.message}</div> : null}
+      </main>
+    </div>
   );
 };
 

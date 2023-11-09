@@ -1,0 +1,25 @@
+@mixin tab-header($color) {
+  background-color: $color;
+
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 4px;
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+@mixin panel-box-shadow {
+  box-shadow: -8px 8px 0 0 #000000;
+}
+
+@mixin gap-12px {
+  display: flex;
+  gap: 12px;
+}

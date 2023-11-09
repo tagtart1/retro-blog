@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, redirect, useNavigate } from "react-router-dom";
-import "./CreatePost.css";
+import "./CreatePost.scss";
 import { useState } from "react";
 import { useUser } from "../../UserProvider";
 import { usePosts } from "../../PostProvider";

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 import { useUser } from "../../UserProvider";
-import "./Dashboard.css";
+import "./Dashboard.scss";
 import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
 import CreateIcon from "../../images/Create-Icon-01.svg";
 import { usePosts } from "../../PostProvider";
+import ActionIcon from "../ActionIcon/ActionIcon";
+import DraftIcon from "../../images/Draft-Icons-04.svg";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -13,9 +15,18 @@ const Dashboard = () => {
   const { posts, setPosts, drafts, setDrafts } = usePosts();
 
   const [isLoading, setIsLoading] = useState(false);
+  const [showHelpPopUp, setShowHelpPopUp] = useState(false);
 
   const openPost = (postId) => {
     navigate(`/posts/${postId}`);
+  };
+
+  const goToDraft = () => {
+    navigate("/drafts");
+  };
+
+  const openHelp = () => {
+    setShowHelpPopUp(true);
   };
 
   useEffect(() => {
@@ -63,32 +74,41 @@ const Dashboard = () => {
   }
 
   return (
-    <main className="dashboard-main">
-      <div className="user-post-sections">
+    <div className="dashboard-parent">
+      <main>
+        <div className="tab-top">
+          <h2>Your Posts</h2>
+          <div className="action-group">
+            <span>_</span>
+            <span>O</span>
+            <span>X</span>
+          </div>
+        </div>
+
         <section className="posts-feed">
-          <h2>Posted</h2>
+          <div className="label-section">
+            <div className="label-box">Title</div>
+            <div className="label-box">Date Posted</div>
+          </div>
           {isLoading ? (
             <p>LOADING</p>
           ) : posts && posts.length > 0 ? (
-            posts.map((post) => {
+            posts.map((post, index) => {
+              const colorClass = ["pink", "yellow", "blue"][index % 3];
+
               return (
                 <article
                   key={post.id}
-                  className="post-parent"
+                  className={`post-parent ${colorClass}`}
                   onClick={() => openPost(post.id)}
                 >
-                  <h2>{post.title}</h2>
-                  <div className="post-date">
-                    Posted on{" "}
-                    {moment(post.createdTimestamp).format("MMM Do, YYYY")}
-                    {post.lastUpdatedTimestamp ? (
-                      <span>
-                        Last updated:{" "}
-                        {moment(post.lastUpdatedTimestamp).format(
-                          "MMM Do, YYYY"
-                        )}
-                      </span>
-                    ) : null}
+                  <div className="label-box">
+                    <h2>{post.title}</h2>
+                  </div>
+                  <div className="label-box">
+                    <div className="post-date">
+                      {moment(post.createdTimestamp).format("MMM Do, YYYY")}
+                    </div>
                   </div>
                 </article>
               );
@@ -97,39 +117,12 @@ const Dashboard = () => {
             <h1>You have 0 posts</h1>
           )}
         </section>
-        <section className="posts-feed">
-          <h2>Drafts</h2>
-          {isLoading ? (
-            <p>LOADING</p>
-          ) : drafts && drafts.length > 0 ? (
-            drafts.map((post) => {
-              return (
-                <article
-                  key={post.id}
-                  className="post-parent"
-                  onClick={() => openPost(post.id)}
-                >
-                  <h2>{post.title}</h2>
-                  <p className="post-date">
-                    Started on{" "}
-                    {moment(post.createdTimestamp).format("MMM Do, YYYY")}
-                  </p>
-                </article>
-              );
-            })
-          ) : (
-            <h1>You have 0 drafts</h1>
-          )}
-        </section>
-      </div>
-      <a
-        href="http://localhost:3000/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Goto blog
-      </a>
-    </main>
+      </main>
+      <section className="actions">
+        <ActionIcon icon={DraftIcon} name={"drafts"} onClick={goToDraft} />
+        <ActionIcon icon={DraftIcon} name={"help.txt"} onClick={openHelp} />
+      </section>
+    </div>
   );
 };
 

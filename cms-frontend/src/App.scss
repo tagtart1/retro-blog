@@ -1,0 +1,36 @@
+@use "_variables" as v;
+
+.App {
+  width: 100%;
+  background-color: #538339;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Style for all scrollbars */
+::-webkit-scrollbar {
+  width: 20px; /* width of the entire scrollbar */
+  background: #e8e2d7; /* track color */
+}
+
+::-webkit-scrollbar-track {
+  border-left: 2px solid black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  box-sizing: border-box;
+  background: v.$red_orange; /* thumb color */
+  border-radius: 14px; /* square corners */
+  border: 2px solid black;
+  border-right: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+}
+
+/* Handle active or clicked state */
+::-webkit-scrollbar-thumb:active {
+}

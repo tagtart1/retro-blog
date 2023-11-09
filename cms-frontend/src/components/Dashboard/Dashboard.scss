@@ -1,0 +1,136 @@
+@use "../../variables" as v;
+
+.dashboard-parent {
+  font-family: Roboto;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  main {
+    width: 100%;
+    max-width: 700px;
+    border: 2px solid black;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: -8px 8px 0 0 #000000;
+    height: fit-content;
+    background-color: v.$panel_white;
+
+    margin: 0px 25px;
+    .tab-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: bold;
+      width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-top: 4px;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      border-bottom: 2px solid black;
+      background-color: v.$red_orange;
+
+      .action-group {
+        display: flex;
+        gap: 12px;
+      }
+    }
+
+    .posts-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      padding: 12px 12px;
+      width: 100%;
+      align-items: center;
+
+      max-height: 440px;
+      overflow-y: auto;
+      background-color: #eaddd1;
+
+      .label-section {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-weight: bold;
+        padding: 0px 8px;
+      }
+      .post-parent {
+        width: 100%;
+        padding: 8px;
+        border: 2px black solid;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+        gap: 12px;
+
+        .post-date {
+          font-weight: bold;
+          display: flex;
+          gap: 8px;
+        }
+      }
+    }
+
+    .pink {
+      background-color: #f59098;
+    }
+
+    .yellow {
+      background-color: v.$peach;
+    }
+
+    .blue {
+      background-color: #1c8ec1;
+    }
+  }
+}
+.label-box {
+  border-radius: 8px;
+  border: 2px solid black;
+  padding: 8px 12px;
+  background-color: v.$label_background_white;
+}
+.logout-button {
+  border: none;
+  background-color: inherit;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.action-bar {
+  display: flex;
+  align-items: center;
+}
+
+/** <section className="posts-feed">
+          <h2>Drafts</h2>
+          {isLoading ? (
+            <p>LOADING</p>
+          ) : drafts && drafts.length > 0 ? (
+            drafts.map((post) => {
+              return (
+                <article
+                  key={post.id}
+                  className="post-parent"
+                  onClick={() => openPost(post.id)}
+                >
+                  <h2>{post.title}</h2>
+                  <p className="post-date">
+                    Started on{" "}
+                    {moment(post.createdTimestamp).format("MMM Do, YYYY")}
+                  </p>
+                </article>
+              );
+            })
+          ) : (
+            <h1>You have 0 drafts</h1>
+          )}
+        </section> **/

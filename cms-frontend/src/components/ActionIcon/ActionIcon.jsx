@@ -1,9 +1,9 @@
 import React from "react";
 import "./ActionIcon.scss";
 
-const ActionIcon = ({ onClick, icon, name }) => {
+const ActionIcon = ({ onClick, icon, name, className }) => {
   return (
-    <div onClick={onClick} className="action-button">
+    <div onClick={onClick} className={`action-button ${className}`}>
       <img src={icon} alt="post action icon" />
       <p>{name}</p>
     </div>
