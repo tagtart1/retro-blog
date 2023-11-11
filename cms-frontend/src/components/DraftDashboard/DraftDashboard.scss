@@ -1,23 +1,21 @@
 @use "../../variables" as v;
+@use "../../mixin" as m;
 
-.dashboard-parent {
-  font-family: Roboto;
-  box-sizing: border-box;
+.draft-dashboard-parent {
   display: flex;
   max-width: 700px;
   width: 100%;
   position: relative;
-
   justify-content: center;
+
   main {
     width: 100%;
 
     border: 2px solid black;
     border-radius: 6px;
     overflow: hidden;
-    box-shadow: -8px 8px 0 0 #000000;
+    @include m.panel-box-shadow;
     height: fit-content;
-
     .tab-top {
       display: flex;
       justify-content: space-between;
@@ -35,11 +33,11 @@
 
       .action-group {
         display: flex;
-        gap: 12px;
+        @include m.gap-12px;
       }
     }
 
-    .posts-feed {
+    .drafts-feed {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -59,7 +57,7 @@
         font-weight: bold;
         padding: 0px 8px;
       }
-      .post-parent {
+      .draft-parent {
         width: 100%;
         padding: 8px;
         border: 2px black solid;
@@ -75,8 +73,16 @@
           gap: 8px;
         }
       }
-    }
 
+      .no-drafts-bar {
+        padding: 8px;
+        border: 2px black solid;
+        border-radius: 8px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+    }
     .pink {
       background-color: #f59098;
     }
@@ -90,51 +96,3 @@
     }
   }
 }
-.label-box {
-  border-radius: 8px;
-  border: 2px solid black;
-  padding: 8px 12px;
-  background-color: v.$label_background_white;
-}
-.logout-button {
-  border: none;
-  background-color: inherit;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.action-bar {
-  display: flex;
-  align-items: center;
-}
-
-.actions {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/** <section className="posts-feed">
-          <h2>Drafts</h2>
-          {isLoading ? (
-            <p>LOADING</p>
-          ) : drafts && drafts.length > 0 ? (
-            drafts.map((post) => {
-              return (
-                <article
-                  key={post.id}
-                  className="post-parent"
-                  onClick={() => openPost(post.id)}
-                >
-                  <h2>{post.title}</h2>
-                  <p className="post-date">
-                    Started on{" "}
-                    {moment(post.createdTimestamp).format("MMM Do, YYYY")}
-                  </p>
-                </article>
-              );
-            })
-          ) : (
-            <h1>You have 0 drafts</h1>
-          )}
-        </section> **/

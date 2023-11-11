@@ -1,28 +1,17 @@
 @use "../../variables" as v;
 
-.app-header {
+.action-header {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  background-color: #ebb337;
-  border-bottom: 4px solid black;
-  padding-bottom: 12px;
+  gap: 24px;
+  flex-direction: column;
 }
 
-.app-header {
-  .action-bar {
-    display: flex;
-    gap: 24px;
-  }
-}
-
-.app-header {
+.action-header {
   h1 {
     font-weight: bold;
     font-size: 48px;
     position: relative;
-    border: 3px solid black;
+    //border: 3px solid black;
     text-align: center;
     padding: 8px 24px;
     border-radius: 8px;

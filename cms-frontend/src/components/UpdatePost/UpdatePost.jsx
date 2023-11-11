@@ -1,46 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import he from "he";
 import "./UpdatePost.scss";
 import { usePosts } from "../../PostProvider";
+import ActionIcon from "../ActionIcon/ActionIcon";
+import TrashIcon from "../../images/Trash-Icons-06.svg";
+import SaveIcon from "../../images/Save-Icon-02.svg";
+import DraftIcon from "../../images/Draft-Icons-04.svg";
+import PostIcon from "../../images/Post-Icon.svg";
+import ErrorPopUp from "../ErrorPopUp/ErrorPopUp";
+import { useError } from "../../ErrorProvider";
 
 const UpdatePost = () => {
   const params = useParams();
+  const formRef = useRef(null);
   const navigate = useNavigate();
   const { posts, setPosts, drafts, setDrafts } = usePosts();
 
   const [currentPost, setCurrentPost] = useState(null);
-  const [shouldDraft, setShouldDraft] = useState();
-  const [errors, setErrors] = useState(null);
+
+  const { setError, error } = useError();
 
   useEffect(() => {
     const url = `http://localhost:5000/api/v1/posts/${params.id}`;
 
     const fetchPost = async () => {
-      const res = await fetch(url);
+      try {
+        const res = await fetch(url, { credentials: "include" });
 
-      if (!res.ok) {
-        const errs = await res.json();
+        if (!res.ok) {
+          const errs = await res.json();
 
-        setErrors(errs);
-        return;
+          setError(errs.message);
+          return;
+        }
+        const result = await res.json();
+
+        setCurrentPost(result.data.post);
+      } catch (err) {
+        setError(err.message);
       }
-      const result = await res.json();
-
-      setCurrentPost(result.data.post);
-      setShouldDraft(result.data.post.is_draft);
     };
 
     fetchPost();
   }, []);
 
-  const cancelEdit = (e) => {
-    e.preventDefault();
-    navigate("/");
-  };
-
-  const updatePost = async (e) => {
-    e.preventDefault();
+  const updatePost = async (form, shouldDraft) => {
     const endpoint = `http://localhost:5000/api/v1/posts/${params.id}`;
     const options = {
       credentials: "include",
@@ -48,8 +53,8 @@ const UpdatePost = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         id: params.id,
-        title: e.target.title.value,
-        text: e.target.text.value,
+        title: form.title.value,
+        text: form.text.value,
         isDraft: shouldDraft,
       }),
     };
@@ -59,7 +64,8 @@ const UpdatePost = () => {
 
       if (!response.ok) {
         const result = await response.json();
-        setErrors(result);
+
+        setError(result.message);
         return;
       }
 
@@ -67,7 +73,7 @@ const UpdatePost = () => {
       setPosts(null);
       navigate("/");
     } catch {
-      setErrors("Could not update post");
+      setError("Could not update post");
     }
   };
 
@@ -87,66 +93,70 @@ const UpdatePost = () => {
       setPosts(null);
       navigate("/");
     } catch (err) {
-      setErrors("Could not delete post");
+      setError("Could not delete post");
     }
   };
-  if (errors && errors.code === "NOT_FOUND") {
-    return <div>POST NOT FOUND</div>;
-  }
-
-  if (!currentPost) return;
 
   return (
-    <div className="update-post-parent">
-      <main className="update-post-main">
-        <div className="tab-top">
-          <h2>Update Post</h2>
-          <div className="action-group">
-            <span>_</span>
-            <span>O</span>
-            <span>X</span>
+    <>
+      <div className="update-post-parent">
+        <main className="update-post-main">
+          <div className="tab-top">
+            <h2>Update Post</h2>
+            <div className="action-group">
+              <span>_</span>
+              <span>O</span>
+              <span>X</span>
+            </div>
           </div>
-        </div>
-        <form className="update-post-form" onSubmit={updatePost}>
-          <div className="label-group">
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              defaultValue={currentPost.title}
+          <form className="update-post-form" ref={formRef}>
+            <div className="label-group">
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                defaultValue={currentPost ? currentPost.title : null}
+              />
+            </div>
+            <div className="label-group">
+              <label htmlFor="text">Text:</label>
+              <textarea
+                name="text"
+                id="text"
+                cols="30"
+                rows="10"
+                defaultValue={currentPost ? he.decode(currentPost.text) : null}
+              ></textarea>
+            </div>
+          </form>
+        </main>
+      </div>
+      <section className="actions">
+        {currentPost ? (
+          !currentPost.is_draft ? (
+            <ActionIcon
+              icon={DraftIcon}
+              name={"save to drafts"}
+              onClick={() => updatePost(formRef.current, true)}
             />
-          </div>
-          <div className="label-group">
-            <label htmlFor="text">Text:</label>
-            <textarea
-              name="text"
-              id="text"
-              cols="30"
-              rows="10"
-              defaultValue={he.decode(currentPost.text)}
-            ></textarea>
-          </div>
-          <button onClick={cancelEdit} type="button">
-            Cancel
-          </button>
-          <button type="submit">Save</button>
-          <button type="button" onClick={deletePost}>
-            Delete
-          </button>
-          {currentPost.is_draft ? (
-            <button type="submit" onClick={() => setShouldDraft(false)}>
-              Post
-            </button>
           ) : (
-            <button type="submit" onClick={() => setShouldDraft(true)}>
-              Send to drafts
-            </button>
-          )}
-        </form>
-        {errors ? <div>{errors.message}</div> : null}
-      </main>
-    </div>
+            <ActionIcon
+              icon={PostIcon}
+              name={"post"}
+              onClick={() => updatePost(formRef.current, false)}
+            />
+          )
+        ) : null}
+
+        <ActionIcon
+          icon={SaveIcon}
+          name={"save"}
+          onClick={() => updatePost(formRef.current, currentPost.is_draft)}
+        />
+        <ActionIcon icon={TrashIcon} name={"delete"} onClick={deletePost} />
+      </section>
+    </>
   );
 };
 

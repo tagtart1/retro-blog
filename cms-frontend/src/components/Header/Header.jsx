@@ -35,17 +35,10 @@ const Header = () => {
   };
   if (!user) return null;
   return (
-    <header className="app-header">
-      <h1>Hello, {user.username}</h1>
-      <div className="action-bar">
-        <ActionIcon icon={HomeIcon} onClick={goToHome} name={"home"} />
-        <ActionIcon
-          icon={CreateIcon}
-          onClick={goToCreatePost}
-          name={"create"}
-        />
-        <ActionIcon icon={LogoutIcon} onClick={logOut} name={"log out"} />
-      </div>
+    <header className="action-header">
+      <ActionIcon icon={HomeIcon} onClick={goToHome} name={"home"} />
+      <ActionIcon icon={CreateIcon} onClick={goToCreatePost} name={"create"} />
+      <ActionIcon icon={LogoutIcon} onClick={logOut} name={"log out"} />
     </header>
   );
 };

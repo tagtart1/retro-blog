@@ -9,7 +9,12 @@ router.get("/", postsController.getAllPosts);
 router.get("/drafts", validateToken, postsController.getDraftsFromUser);
 router.post("/", validateToken, postsController.addPost);
 
-router.get("/:id", validateIdParams, postsController.getPostById);
+router.get(
+  "/:id",
+  validateToken,
+  validateIdParams,
+  postsController.getPostById
+);
 router.delete(
   "/:id",
   validateToken,

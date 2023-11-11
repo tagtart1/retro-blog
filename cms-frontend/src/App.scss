@@ -1,11 +1,24 @@
 @use "_variables" as v;
 
+.app-wrapper {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background-color: v.$panel_white;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  h1 {
+    font-size: 54px;
+  }
+}
+
 .App {
   width: 100%;
-  background-color: #538339;
-  height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+
+  gap: 36px;
 }
 
 /* Style for all scrollbars */
@@ -21,7 +34,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   box-sizing: border-box;
-  background: v.$red_orange; /* thumb color */
+  background: v.$peach; /* thumb color */
   border-radius: 14px; /* square corners */
   border: 2px solid black;
   border-right: none;

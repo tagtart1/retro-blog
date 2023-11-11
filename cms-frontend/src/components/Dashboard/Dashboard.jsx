@@ -8,6 +8,7 @@ import CreateIcon from "../../images/Create-Icon-01.svg";
 import { usePosts } from "../../PostProvider";
 import ActionIcon from "../ActionIcon/ActionIcon";
 import DraftIcon from "../../images/Draft-Icons-04.svg";
+import FileIcon from "../../images/File-Icon-08.svg";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -74,55 +75,56 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard-parent">
-      <main>
-        <div className="tab-top">
-          <h2>Your Posts</h2>
-          <div className="action-group">
-            <span>_</span>
-            <span>O</span>
-            <span>X</span>
+    <>
+      <div className="dashboard-parent">
+        <main>
+          <div className="tab-top">
+            <h2>Your Posts</h2>
+            <div className="action-group">
+              <span>_</span>
+              <span>O</span>
+              <span>X</span>
+            </div>
           </div>
-        </div>
 
-        <section className="posts-feed">
-          <div className="label-section">
-            <div className="label-box">Title</div>
-            <div className="label-box">Date Posted</div>
-          </div>
-          {isLoading ? (
-            <p>LOADING</p>
-          ) : posts && posts.length > 0 ? (
-            posts.map((post, index) => {
-              const colorClass = ["pink", "yellow", "blue"][index % 3];
-
-              return (
-                <article
-                  key={post.id}
-                  className={`post-parent ${colorClass}`}
-                  onClick={() => openPost(post.id)}
-                >
-                  <div className="label-box">
-                    <h2>{post.title}</h2>
-                  </div>
-                  <div className="label-box">
-                    <div className="post-date">
-                      {moment(post.createdTimestamp).format("MMM Do, YYYY")}
+          <section className="posts-feed">
+            <div className="label-section">
+              <div>Title</div>
+              <div>Date Posted</div>
+            </div>
+            {isLoading ? (
+              <p>LOADING</p>
+            ) : posts && posts.length > 0 ? (
+              posts.map((post, index) => {
+                const colorClass = ["pink", "yellow", "blue"][index % 3];
+                return (
+                  <article
+                    key={post.id}
+                    className={`post-parent ${colorClass}`}
+                    onClick={() => openPost(post.id)}
+                  >
+                    <div className="label-box">
+                      <h2>{post.title}</h2>
                     </div>
-                  </div>
-                </article>
-              );
-            })
-          ) : (
-            <h1>You have 0 posts</h1>
-          )}
-        </section>
-      </main>
+                    <div className="label-box">
+                      <div className="post-date">
+                        {moment(post.created_timestamp).format("MMM Do, YYYY")}
+                      </div>
+                    </div>
+                  </article>
+                );
+              })
+            ) : (
+              <h1>You have 0 posts</h1>
+            )}
+          </section>
+        </main>
+      </div>
       <section className="actions">
         <ActionIcon icon={DraftIcon} name={"drafts"} onClick={goToDraft} />
-        <ActionIcon icon={DraftIcon} name={"help.txt"} onClick={openHelp} />
+        <ActionIcon icon={FileIcon} name={"empty.txt"} onClick={openHelp} />
       </section>
-    </div>
+    </>
   );
 };
 

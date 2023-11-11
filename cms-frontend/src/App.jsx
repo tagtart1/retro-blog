@@ -9,9 +9,14 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UpdatePost from "./components/UpdatePost/UpdatePost";
 import Header from "./components/Header/Header";
+import DraftDashboard from "./components/DraftDashboard/DraftDashboard";
+import { useError } from "./ErrorProvider";
+import ErrorPopUp from "./components/ErrorPopUp/ErrorPopUp";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   const { user, setUser } = useUser();
+  const { error, setError } = useError();
 
   const navigate = useNavigate();
 
@@ -41,15 +46,27 @@ function App() {
     };
     fetchUser();
   }, [setUser, navigate, user]);
-
+  if (!user) return null;
   return (
-    <div className="App">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/create" element={<CreatePost />} />
-        <Route path="/posts/:id" element={<UpdatePost />} />
-      </Routes>
+    <div className="app-wrapper">
+      <h1>Welcome, {user.username}</h1>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/drafts" element={<DraftDashboard />} />
+          <Route path="/create" element={<CreatePost />} />
+          <Route path="/posts/:id" element={<UpdatePost />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+      {error ? (
+        <ErrorPopUp
+          message={error}
+          onClose={() => setError(null)}
+          isVisible={error !== null}
+        />
+      ) : null}
     </div>
   );
 }
