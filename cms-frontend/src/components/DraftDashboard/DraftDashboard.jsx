@@ -23,7 +23,7 @@ const DraftDashboard = () => {
     const fetchDrafts = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/posts/drafts`,
+        `https://api.retropublishingblog.com/api/v1/posts/drafts`,
         {
           credentials: "include",
         }

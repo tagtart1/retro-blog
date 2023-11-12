@@ -22,7 +22,7 @@ const UpdatePost = () => {
   const { setError, error } = useError();
 
   useEffect(() => {
-    const url = `http://localhost:5000/api/v1/posts/${params.id}`;
+    const url = `https://api.retropublishingblog.com/api/v1/posts/${params.id}`;
 
     const fetchPost = async () => {
       try {
@@ -46,7 +46,7 @@ const UpdatePost = () => {
   }, []);
 
   const updatePost = async (form, shouldDraft) => {
-    const endpoint = `http://localhost:5000/api/v1/posts/${params.id}`;
+    const endpoint = `https://api.retropublishingblog.com/api/v1/posts/${params.id}`;
     const options = {
       credentials: "include",
       method: "PATCH",
@@ -79,7 +79,7 @@ const UpdatePost = () => {
 
   const deletePost = async (e) => {
     e.preventDefault();
-    const endpoint = `http://localhost:5000/api/v1/posts/${params.id}`;
+    const endpoint = `https://api.retropublishingblog.com/api/v1/posts/${params.id}`;
     const options = {
       credentials: "include",
       method: "DELETE",

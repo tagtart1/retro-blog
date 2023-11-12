@@ -36,7 +36,7 @@ const Dashboard = () => {
     const fetchPosts = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/posts?user_id=${user.id}`
+        `https://api.retropublishingblog.com/api/v1/posts?user_id=${user.id}`
       );
 
       const results = await response.json();
@@ -48,7 +48,7 @@ const Dashboard = () => {
     const fetchDrafts = async () => {
       setIsLoading(true);
       const response = await fetch(
-        `http://localhost:5000/api/v1/posts/drafts`,
+        `https://api.retropublishingblog.com/api/v1/posts/drafts`,
         {
           credentials: "include",
         }

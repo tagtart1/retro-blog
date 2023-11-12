@@ -16,7 +16,9 @@ const BlogApp = () => {
   useEffect(() => {
     const fetchAllPosts = async () => {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/v1/posts`);
+      const response = await fetch(
+        `https://api.retropublishingblog.com/api/v1/posts`
+      );
 
       const results = await response.json();
 

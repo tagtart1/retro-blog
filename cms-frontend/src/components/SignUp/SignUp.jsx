@@ -11,7 +11,7 @@ const SignUp = () => {
   const { user, setUser } = useUser();
 
   const { handleSubmit, errors, setErrors } = useAuthForm(
-    "http://localhost:5000/api/v1/sign-up",
+    "https://api.retropublishingblog.com/api/v1/sign-up",
     setUser
   );
 

@@ -18,7 +18,7 @@ const CreatePost = () => {
   const { setError } = useError();
   const navigate = useNavigate();
 
-  const url = "http://localhost:5000/api/v1/posts";
+  const url = "https://api.retropublishingblog.com/api/v1/posts";
 
   const submitPost = async (form, shouldDraft) => {
     const title = form.title.value;

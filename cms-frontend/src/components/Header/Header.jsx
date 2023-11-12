@@ -21,10 +21,13 @@ const Header = () => {
   };
 
   const logOut = async () => {
-    const response = await fetch("http://localhost:5000/api/v1/log-out", {
-      credentials: "include",
-      method: "POST",
-    });
+    const response = await fetch(
+      "https://api.retropublishingblog.com/api/v1/log-out",
+      {
+        credentials: "include",
+        method: "POST",
+      }
+    );
 
     if (response.ok) {
       setUser(null);
