@@ -9,6 +9,7 @@ import SignUp from "./components/SignUp/SignUp";
 import LogIn from "./components/LogIn/LogIn";
 import { ErrorProvider } from "./ErrorProvider";
 import NotFound from "./components/NotFound/NotFound";
+import BlogApp from "./components/BlogApp/BlogApp";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,10 +19,11 @@ root.render(
         <PostProvider>
           <ErrorProvider>
             <Routes>
-              <Route path="/*" element={<App />} />
+              <Route path="/" element={<BlogApp />} />
+              <Route path="/dashboard/*" element={<App />} />
               <Route path="/log-in" element={<LogIn />} />
               <Route path="/sign-up" element={<SignUp />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFound isTopLevel={true} />} />
             </Routes>
           </ErrorProvider>
         </PostProvider>

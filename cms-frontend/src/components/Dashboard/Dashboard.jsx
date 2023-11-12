@@ -16,18 +16,17 @@ const Dashboard = () => {
   const { posts, setPosts, drafts, setDrafts } = usePosts();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showHelpPopUp, setShowHelpPopUp] = useState(false);
 
   const openPost = (postId) => {
-    navigate(`/posts/${postId}`);
+    navigate(`/dashboard/posts/${postId}`);
   };
 
   const goToDraft = () => {
-    navigate("/drafts");
+    navigate("/dashboard/drafts");
   };
 
-  const openHelp = () => {
-    setShowHelpPopUp(true);
+  const openBlog = () => {
+    navigate("/");
   };
 
   useEffect(() => {
@@ -122,7 +121,7 @@ const Dashboard = () => {
       </div>
       <section className="actions">
         <ActionIcon icon={DraftIcon} name={"drafts"} onClick={goToDraft} />
-        <ActionIcon icon={FileIcon} name={"empty.txt"} onClick={openHelp} />
+        <ActionIcon icon={FileIcon} name={"blogs.exe"} onClick={openBlog} />
       </section>
     </>
   );

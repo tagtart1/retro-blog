@@ -1,9 +1,9 @@
 import React from "react";
 import "./NotFound.scss";
 
-const NotFound = () => {
+const NotFound = ({ isTopLevel }) => {
   return (
-    <div className="not-found-parent">
+    <div className={`not-found-parent ${isTopLevel ? "fart" : ""}`}>
       <main>
         <div className="tab-top">
           <h2>Nothing Here</h2>

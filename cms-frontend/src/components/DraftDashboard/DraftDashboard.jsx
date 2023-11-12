@@ -15,7 +15,7 @@ const DraftDashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const openPost = (postId) => {
-    navigate(`/posts/${postId}`);
+    navigate(`/dashboard/posts/${postId}`);
   };
   useEffect(() => {
     if (!user) return; // No user, don't do anything!

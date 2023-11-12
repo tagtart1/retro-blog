@@ -37,7 +37,7 @@ const useAuthForm = (endpoint, setUser) => {
 
       const result = await response.json();
       setUser(result.data);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setErrors(["Unknown error has occurred."]);
     }

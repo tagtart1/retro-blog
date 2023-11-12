@@ -13,11 +13,11 @@ const Header = () => {
   const { user, setUser } = useUser();
 
   const goToCreatePost = () => {
-    navigate("/create");
+    navigate("/dashboard/create");
   };
 
   const goToHome = () => {
-    navigate("/");
+    navigate("/dashboard/");
   };
 
   const logOut = async () => {

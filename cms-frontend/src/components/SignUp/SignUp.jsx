@@ -19,13 +19,16 @@ const SignUp = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/");
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 
   return (
     <div className="auth-wrapper">
       <section className="auth-form-section">
+        <div className="call-to-action-box">
+          Go <Link to="/">back</Link> to blogs
+        </div>
         <div className="auth-form-panel">
           <div className="form-header-bar">
             <h1 className="form-title">Sign Up</h1>

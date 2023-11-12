@@ -7,6 +7,7 @@ import { usePosts } from "../../PostProvider";
 import ErrorPopUp from "../ErrorPopUp/ErrorPopUp";
 import ActionIcon from "../ActionIcon/ActionIcon";
 import DraftIcon from "../../images/Draft-Icons-04.svg";
+import PostIcon from "../../images/Post-Icon.svg";
 import { useError } from "../../ErrorProvider";
 
 const CreatePost = () => {
@@ -46,7 +47,11 @@ const CreatePost = () => {
 
       setDrafts(null);
       setPosts(null);
-      navigate("/");
+      if (shouldDraft) {
+        navigate("/dashboard/drafts");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {}
   };
 
@@ -93,11 +98,11 @@ const CreatePost = () => {
       <section className="actions">
         <ActionIcon
           icon={DraftIcon}
-          name={"save to drafts"}
+          name={"save draft"}
           onClick={() => submitPost(formRef.current, true)}
         />
         <ActionIcon
-          icon={DraftIcon}
+          icon={PostIcon}
           name={"post"}
           onClick={() => submitPost(formRef.current, false)}
         />

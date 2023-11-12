@@ -71,7 +71,7 @@ const UpdatePost = () => {
 
       setDrafts(null);
       setPosts(null);
-      navigate("/");
+      navigate("/dashboard");
     } catch {
       setError("Could not update post");
     }
@@ -91,7 +91,7 @@ const UpdatePost = () => {
 
       setDrafts(null);
       setPosts(null);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError("Could not delete post");
     }
@@ -137,7 +137,7 @@ const UpdatePost = () => {
           !currentPost.is_draft ? (
             <ActionIcon
               icon={DraftIcon}
-              name={"save to drafts"}
+              name={"save draft"}
               onClick={() => updatePost(formRef.current, true)}
             />
           ) : (
