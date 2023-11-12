@@ -9,6 +9,7 @@ import { usePosts } from "../../PostProvider";
 import ActionIcon from "../ActionIcon/ActionIcon";
 import DraftIcon from "../../images/Draft-Icons-04.svg";
 import FileIcon from "../../images/File-Icon-08.svg";
+import EarthIcon from "../../images/Earth.svg";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -57,15 +58,12 @@ const Dashboard = () => {
       setDrafts(results.data.posts);
       setIsLoading(false);
     };
-    console.log("IN DASHBOARD USE EFFECT");
 
     if (!posts) {
       fetchPosts();
-      console.log("FETCHING POSTS");
     }
     if (!drafts) {
       fetchDrafts();
-      console.log("FETCHING DRAFTS");
     }
   }, [user]);
 

@@ -33,12 +33,11 @@ function App() {
         );
 
         if (!response.ok) {
-          console.log("FAILED TO VALIDATE");
           navigate("/log-in");
           return;
         }
         const result = await response.json();
-        console.log("SETTING USER");
+
         setUser(result.data.user);
       } catch (err) {
         navigate("/log-in");

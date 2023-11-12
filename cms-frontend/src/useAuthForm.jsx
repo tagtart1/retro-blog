@@ -30,7 +30,7 @@ const useAuthForm = (endpoint, setUser) => {
 
       if (!response.ok) {
         const errs = await response.json();
-        console.log(errs);
+
         setErrors(errs.message);
         return;
       }

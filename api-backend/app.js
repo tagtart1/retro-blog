@@ -18,7 +18,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://retro-blog-website.s3-website.us-east-2.amazonaws",
+    ],
     credentials: true,
     optionsSuccessStatus: 200,
   })
