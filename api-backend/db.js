@@ -10,8 +10,8 @@ const pool = new Pool({
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
   ssl: {
-    rejectUnauthorized: true,
-    ca: fs.readFileSync("./global-bundle.pem").toString(),
+    rejectUnauthorized: false,
+    // ca: fs.readFileSync("./global-bundle.pem").toString(),
   },
 });
 
