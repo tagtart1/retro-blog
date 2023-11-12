@@ -7,14 +7,16 @@ const AppError = require("../utils/appError");
 const jwt = require("jsonwebtoken");
 
 // GET all non draft posts
-exports.getAllPosts = asyncHandler(async (req, res) => {
+exports.getAllPosts = asyncHandler(async (req, res, next) => {
   const userId = req.query.user_id;
   const query = userId ? postsQueries.getPostsByUser : postsQueries.getPosts;
   const params = userId ? [userId] : [];
 
   pool.query(query, params, (err, results) => {
-    if (err)
-      throw new AppError("Could not retrieve posts", 400, "SERVER_ERROR");
+    if (err) {
+      next(new AppError("Could not retrieve posts", 400, "SERVER_ERROR"));
+      return;
+    }
 
     res.status(200).json({ data: { posts: results.rows } });
   });
