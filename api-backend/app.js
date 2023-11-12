@@ -36,7 +36,7 @@ app.use("/api/v1", usersRouter);
 app.use((err, req, res, next) => {
   if (err instanceof AppError && err.isOperational) {
     // Handle operational errors by returning a specific error message to the client.
-
+    console.log(err);
     return res
       .status(err.statusCode)
       .json({ code: err.code, message: err.message });

@@ -10,10 +10,14 @@
 
 # production
 **/build
+**/.pem
+
 
 # misc
 **/.DS_Store
 **/.env
+
+**/global-bundle.pem
 **/.env.local
 **/.env.development.local
 **/.env.test.local

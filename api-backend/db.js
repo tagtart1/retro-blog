@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fs = require("fs");
 
 const Pool = require("pg").Pool;
 
@@ -8,6 +9,10 @@ const pool = new Pool({
   database: process.env.DB_DB,
   password: process.env.DB_PASS,
   port: process.env.DB_PORT,
+  ssl: {
+    rejectUnauthorized: true,
+    ca: fs.readFileSync("./global-bundle.pem").toString(),
+  },
 });
 
 module.exports = pool;
