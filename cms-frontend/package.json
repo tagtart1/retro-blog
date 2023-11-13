@@ -18,7 +18,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "sync": "aws s3 sync build/ s3://retropublishingblog.com",
+    "sync": "aws s3 sync build/ s3://retro-blog-bucket",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id E1O8NJGE5A3YYF --paths /*",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

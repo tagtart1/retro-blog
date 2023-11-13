@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import he from "he";
 import "./BlogApp.scss";
 import moment from "moment";
 import ActionIcon from "../ActionIcon/ActionIcon";
@@ -46,7 +47,7 @@ const BlogApp = () => {
             return (
               <article key={post.id} className="blog-post-parent">
                 <div className={`tap-top ${colorClass}`}>
-                  <h2>{post.title}</h2>
+                  <h2>{he.decode(post.title)}</h2>
                   <div className="action-group">
                     <span>_</span>
                     <span>O</span>
@@ -54,7 +55,7 @@ const BlogApp = () => {
                   </div>
                 </div>
                 <div className="blog-content">
-                  <p className="blog-text">{post.text}</p>
+                  <p className="blog-text">{he.decode(post.text)}</p>
                   <div className="post-info">
                     <p>By: {post.username}</p>
                     <p>
