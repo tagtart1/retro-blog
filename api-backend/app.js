@@ -21,8 +21,8 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
-      "http://retro-blog-website.s3-website.us-east-2.amazonaws",
-      "http://retropublishingblog.com",
+
+      "https://www.retropublishingblog.com",
     ],
     credentials: true,
     optionsSuccessStatus: 200,
